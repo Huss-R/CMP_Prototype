@@ -1,0 +1,12 @@
+/* THEME: every colour and font used on the page.
+   The page is light mode only.
+   --you = your guess (blue), --real = the real number (orange), --empty = unfilled figures. */
+:root{
+  --bg:#FFFFFF; --surface:#FFFFFF; --panel:#F1F4F7; --ink:#1B1F23; --muted:#51606E; --line:#B8C2CC; --empty:#C9D1D9;
+  --you:#1B5FA8; --on-you:#FFFFFF; --you-soft:#E8F0F9;
+  --real:#B8431F; --real-soft:#FBEAE4;
+  --head:#0F2A47; --head-ink:#FFFFFF; --focus:#C97A00; --scrim:rgba(10,14,25,.55); --shadow:rgba(16,24,40,.25);
+  --display:"Public Sans","Helvetica Neue",Arial,sans-serif;
+  --body:"Public Sans","Helvetica Neue",Arial,sans-serif;
+  color-scheme:light;
+}

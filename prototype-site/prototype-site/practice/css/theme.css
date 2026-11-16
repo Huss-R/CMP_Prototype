@@ -1,0 +1,38 @@
+/* THEME: every colour and the font. Change a value here and it changes everywhere it is used.
+   The first block is light mode; the two after it are dark mode (keep those two identical).
+   Same values as the statistics prototype, so the two sites match.
+
+   --bg         page background
+   --surface    boxes that sit on the page (buttons, the text box)
+   --panel      pale grey areas (messages, the dock)
+   --ink        main text
+   --muted      grey helper text
+   --line       borders and dividing lines
+   --empty      the unfilled part of the timer bar
+   --you        the main blue (links, buttons, your messages)
+   --on-you     text on top of that blue
+   --you-soft   pale blue (hover, coach note)
+   --real       orange (the timer bar)
+   --real-soft  pale orange (not used on this page)
+   --head       header background
+   --head-ink   header text
+   --focus      the keyboard focus ring
+   --scrim      the dark layer behind the support pop-up
+   --body       the font */
+:root{
+  --bg:#FFFFFF; --surface:#FFFFFF; --panel:#F1F4F7; --ink:#1B1F23; --muted:#51606E; --line:#B8C2CC; --empty:#C9D1D9;
+  --you:#1B5FA8; --on-you:#FFFFFF; --you-soft:#E8F0F9;
+  --real:#B8431F; --real-soft:#FBEAE4;
+  --head:#0F2A47; --head-ink:#FFFFFF; --focus:#C97A00; --scrim:rgba(10,14,25,.55);
+  --body:"Public Sans","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1419; --surface:#161C23; --panel:#1E2630; --ink:#E6EAEE; --muted:#A3AFBA; --line:#3A4654; --empty:#34404D;
+  --you:#7FB2EA; --on-you:#0F1419; --you-soft:#1A2B3F;
+  --real:#F0906E; --real-soft:#3A221A;
+  --head:#0B1D31; --head-ink:#FFFFFF; --focus:#FFD166; --scrim:rgba(0,0,0,.6); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1419; --surface:#161C23; --panel:#1E2630; --ink:#E6EAEE; --muted:#A3AFBA; --line:#3A4654; --empty:#34404D;
+  --you:#7FB2EA; --on-you:#0F1419; --you-soft:#1A2B3F;
+  --real:#F0906E; --real-soft:#3A221A;
+  --head:#0B1D31; --head-ink:#FFFFFF; --focus:#FFD166; --scrim:rgba(0,0,0,.6); color-scheme:dark}

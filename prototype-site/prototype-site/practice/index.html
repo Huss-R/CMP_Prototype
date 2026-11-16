@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Practice Prototype Lite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="bar"><div class="bar-in">
+  <span class="brand">Prototype</span>
+  <span class="spacer"></span>
+  <button class="sos" id="sos" type="button">Support</button>
+</div></div>
+
+<main class="wrap">
+  <header class="intro">
+    <h1>Practise your response</h1>
+    <p class="lede">A short version with one example situation, to show how the page works. Choose what you would do before the moment passes, then see how it plays out.</p>
+    <p class="tip">Tick “Write my own response” to put it in your own words first.</p>
+  </header>
+
+  <nav class="deck" aria-label="Situations">
+    <div class="deck-top">
+      <span class="deck-label" id="deckLabel">Pick a situation</span>
+      <span class="opts">
+        <label class="timer-opt" for="timerOn"><input type="checkbox" id="timerOn" checked> 20-second timer</label>
+        <label class="timer-opt" for="writeOn"><input type="checkbox" id="writeOn"> Write my own response</label>
+      </span>
+    </div>
+    <div class="chips" id="chips"></div>
+  </nav>
+
+  <article class="stage" id="stage">
+    <div class="stage-head"><span class="where" id="where"></span><h2 id="sceneTitle"></h2></div>
+    <div class="thread" id="thread" aria-live="polite"></div>
+    <div class="dock" id="dock"></div>
+  </article>
+
+  <section class="kit" aria-labelledby="kh">
+    <h2 class="sect" id="kh">The tools</h2>
+    <p class="muted" id="kitsum">This short version shows three tools. They come from the 5Ds, a bystander-training method from the organisation Right To Be.</p>
+    <div class="kitlist" id="kitlist"></div>
+    <p><a href="https://righttobe.org/guides/bystander-intervention-training" target="_blank" rel="noopener">Right To Be: the 5Ds of bystander intervention</a></p>
+  </section>
+
+  <footer class="foot">Prototype, short version. The situation and replies are a written example, not real people.</footer>
+</main>
+
+<div class="sheet-wrap" id="sheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-h">
+    <h2 id="sheet-h">Support, any time</h2>
+    <div class="line"><div><strong>1800RESPECT</strong><br><span class="muted">Sexual, domestic and family violence, 24/7</span></div><span class="num">1800 737 732</span><button class="copy" type="button" data-copy="1800 737 732">Copy</button></div>
+    <div class="line"><div><strong>Men's Referral Service</strong><br><span class="muted">For men worried about their own behaviour</span></div><span class="num">1300 766 491</span><button class="copy" type="button" data-copy="1300 766 491">Copy</button></div>
+    <div class="line"><div><strong>Lifeline</strong><br><span class="muted">Crisis support, 24/7</span></div><span class="num">13 11 14</span><button class="copy" type="button" data-copy="13 11 14">Copy</button></div>
+    <button class="btn" id="sheet-close" type="button">Close</button>
+  </div>
+</div>
+
+<!-- Scripts load in this order. Each one can use what the ones before it define. -->
+<script src="js/tools.js"></script>
+<script src="js/situations.js"></script>
+<script src="js/state.js"></script>
+<script src="js/thread.js"></script>
+<script src="js/flow.js"></script>
+<script src="js/toolkit.js"></script>
+<script src="js/support.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
