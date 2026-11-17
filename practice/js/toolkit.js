@@ -1,6 +1,6 @@
 "use strict";
 /* TOOLKIT: the expandable list of the five tools at the bottom, with Tried / Not tried yet. */
-// Redraws the list of five tools, keeping any rows the reader had open.
+// Redraws the list of tools, keeping any rows the reader had open.
 function renderKit(){
   const list = $("kitlist"), open = Array.from(list.querySelectorAll("details")).map(d => d.open);
   list.innerHTML = "";

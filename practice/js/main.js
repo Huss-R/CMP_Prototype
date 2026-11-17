@@ -3,3 +3,6 @@
 load();
 renderKit();
 startScene(SCENES[0].id, false, true);
+$("writeOn").addEventListener("change", () => {
+  if (dock.querySelector(".tools")) showPick(false);
+});

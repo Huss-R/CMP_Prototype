@@ -33,18 +33,19 @@ function startScene(id, scroll, wait){
   play(scene.setup, my).then(() => { base = thread.children.length; fast = false; showPick(true); }).catch(e => { if (e !== STOP) console.error(e); });
 }
 
-// Your turn: shows the question, the timer (if timed and ticked), the text box (if ticked) and the tool buttons.
+// Your turn: shows the question, timer, optional response box, and tool choices.
 // Also used for "Try another tool", in which case it first removes everything after the setup from the thread.
 function showPick(timed){
   stopClock();
   const my = run;
   while (thread.children.length > base) thread.removeChild(thread.lastChild);
   dock.innerHTML = "";
-  dock.appendChild(el("p", "dock-label", timed ? scene.prompt : missed ? "The moment has passed, but it isn't too late. What do you do now?" : "Pick a tool to see how it could go."));
+  const prompt = el("p", "dock-label", timed ? scene.prompt : missed ? "The moment has passed, but it isn't too late. What do you do now?" : "Pick a tool to see how it could go.");
+  prompt.setAttribute("aria-live", "polite");
+  dock.appendChild(prompt);
 
-  // Optional: with "Write my own response" ticked, a text box appears above the tools.
-  const ta = el("textarea"); ta.id = "reply"; ta.maxLength = 400; ta.placeholder = "Write what you would actually say or do.";
   const writing = $("writeOn").checked;
+  const ta = el("textarea"); ta.id = "reply"; ta.maxLength = 400; ta.placeholder = "Write what you would actually say or do.";
   ta.value = wrote; ta.hidden = !writing && !wrote;
   const clockBox = el("div", "clockbox");
 
@@ -59,8 +60,8 @@ function showPick(timed){
       fill.style.width = (left / (SECONDS * 10)) + "%";
       text.textContent = Math.ceil(left / 1000) + " seconds left";
       if (left <= 0 && writing && ta.value.trim()) {
-        stopClock(); ta.disabled = true;
-        text.textContent = "Time's up. Pick the tool closest to what you wrote.";
+        stopClock();
+        text.textContent = "Time's up. Submit your response when you're ready.";
       } else if (left <= 0) {
         stopClock(); missed = true;
         show(addStep(["n", "Nobody says anything, and the moment passes."]));
@@ -71,15 +72,41 @@ function showPick(timed){
   }
   dock.appendChild(clockBox);
   dock.appendChild(ta);
-  if (!ta.hidden) dock.appendChild(el("p", "muted", "Then pick the tool closest to what you wrote."));
+  const hint = el("p", "muted", "Submit your response, then choose the tool it was closest to.");
+  hint.hidden = !writing;
+  dock.appendChild(hint);
 
   const grid = el("div", "tools");
+  grid.hidden = writing;
   TOOL_ORDER.filter(k => scene.tools[k]).forEach(k => {
     const b = btn("tool", "", () => { wrote = ta.value.replace(/\s+/g, " ").trim(); playTool(k); });
     const name = el("span", "tn"); if (triedHere(k)) name.appendChild(el("span", "tick")); name.appendChild(document.createTextNode(TOOLS[k].name));
-    b.appendChild(name); b.appendChild(el("span", "tw", TOOLS[k].what)); b.appendChild(el("span", "te", scene.tools[k].example));
+    const example = el("span", "te", scene.tools[k].example);
+    example.hidden = writing;
+    b.appendChild(name); b.appendChild(el("span", "tw", TOOLS[k].what)); b.appendChild(example);
     grid.appendChild(b);
   });
+
+  if (writing) {
+    const submit = btn("btn", "Submit response", () => {
+      wrote = ta.value.replace(/\s+/g, " ").trim();
+      if (!wrote) return;
+      stopClock();
+      clockBox.hidden = true;
+      prompt.className = "wrote";
+      prompt.textContent = 'Your response: "' + wrote + '"';
+      const question = el("p", "dock-label", "Which tool was your response closest to?");
+      dock.insertBefore(question, clockBox);
+      ta.hidden = true;
+      submit.hidden = true;
+      hint.hidden = true;
+      grid.hidden = false;
+      grid.querySelector("button").focus();
+    });
+    submit.disabled = !ta.value.trim();
+    ta.addEventListener("input", () => { submit.disabled = !ta.value.trim(); });
+    dock.appendChild(submit);
+  }
   dock.appendChild(grid);
   show(dock);
 }
