@@ -29,7 +29,6 @@ function renderResults(){
       '<span class="ddot you" style="left:' + g + '%"></span><span class="ddot real" style="left:' + r + '%"></span></span></button>';
   }).join("");
   rows.querySelectorAll(".drow").forEach(b => b.addEventListener("click", () => setCurrent(b.dataset.id, true)));
-  $("talkline").hidden = !n;
   $("reset").hidden = !n;
 }
 
