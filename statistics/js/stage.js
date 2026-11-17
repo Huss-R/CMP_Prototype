@@ -53,6 +53,7 @@ function renderStage(){
           '<div class="legend" id="legend"></div>' +
           compareHtml +
           '<div class="why"><h3>Why it matters</h3><p>' + esc(c.why) + "</p></div>" +
+          '<div class="talk"><h3>Talk about it</h3><p>' + esc(c.talk) + "</p></div>" +
           '<p class="source">Source: <a href="' + esc(c.url) + '" target="_blank" rel="noopener">' + esc(c.source) + "</a></p>" +
           '<div class="navrow"><button class="btn" type="button" id="next">Next</button><button class="btn ghost" type="button" id="again">Guess again</button></div>' +
         "</div>" +
